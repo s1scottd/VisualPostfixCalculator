@@ -16,19 +16,18 @@ import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 
 import java.io.InputStream;
-import java.util.LinkedList;
 import java.util.List;
 
 public class VisualPostfixCalculator extends Application {
 
   private TextField display;
-  private CustomStack<Double> stack; // Custom stack implementation
+  private LinkedListStack<Double> stack; // Custom stack implementation
   private VBox stackDisplay;
   private boolean clearDisplayOnNextDigit = false;
 
   @Override
   public void start(Stage primaryStage) {
-    stack = new CustomStack<>(); // Initialize custom stack
+    stack = new LinkedListStack<>(); // Initialize custom stack
     display = new TextField();
     display.setEditable(false);
 
@@ -283,49 +282,5 @@ public class VisualPostfixCalculator extends Application {
 
   public static void main(String[] args) {
     launch(args);
-  }
-}
-
-// Custom stack implementation with all methods fully implemented
-class CustomStack<T> {
-  private LinkedList<T> elements;
-
-  public CustomStack() {
-    elements = new LinkedList<>();
-  }
-
-  public void push(T value) {
-    elements.addFirst(value); // Adds element to the top of the stack
-  }
-
-  public T pop() {
-    if (elements.isEmpty()) {
-      throw new IllegalStateException("Stack is empty");
-    }
-    return elements.removeFirst(); // Removes element from the top of the stack
-  }
-
-  public T peek() {
-    if (elements.isEmpty()) {
-      throw new IllegalStateException("Stack is empty");
-    }
-    return elements.getFirst(); // Returns the top element without removing it
-  }
-
-  public void clear() {
-    elements.clear(); // Clears all elements in the stack
-  }
-
-  public int size() {
-    return elements.size(); // Returns the number of elements in the stack
-  }
-
-  public boolean isEmpty() {
-    return elements.isEmpty(); // Checks if the stack is empty
-  }
-
-  // Helper method to retrieve the entire contents of the stack
-  public List<T> getContents() {
-    return new LinkedList<>(elements); // Return a copy to prevent modification
   }
 }
