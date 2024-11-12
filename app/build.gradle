@@ -6,43 +6,54 @@
  */
 
 plugins {
-    // Apply the application plugin to add support for building a CLI application in Java.
-    id 'application'
-    id 'org.openjfx.javafxplugin' version '0.1.0'
+  // Apply the application plugin to add support for building a CLI application in Java.
+  id 'application'
+  id 'org.openjfx.javafxplugin' version '0.1.0'
 }
 
 repositories {
-    // Use Maven Central for resolving dependencies.
-    mavenCentral()
+  // Use Maven Central for resolving dependencies.
+  mavenCentral()
 }
 
 dependencies {
-    // Use JUnit test framework.
-    testImplementation libs.junit
+  // Use JUnit test framework.
+  testImplementation libs.junit
 
-    // This dependency is used by the application.
-    implementation libs.guava
-    implementation "org.openjfx:javafx-controls:17.0.13"
-    implementation "org.openjfx:javafx-fxml:17.0.13"
-    implementation 'org.openjfx:javafx-graphics:17.0.13'
-    implementation "org.kordamp.ikonli:ikonli-javafx:12.3.0"
-    implementation "org.kordamp.ikonli:ikonli-fontawesome5-pack:12.3.0"
-    implementation "org.kordamp.ikonli:ikonli-fontawesome-pack:12.3.0"
+  // JavaFX and Ikonli dependencies
+  implementation libs.guava
+  implementation "org.openjfx:javafx-controls:17.0.13"
+  implementation "org.openjfx:javafx-fxml:17.0.13"
+  implementation 'org.openjfx:javafx-graphics:17.0.13'
+  implementation "org.kordamp.ikonli:ikonli-javafx:12.3.0"
+  implementation "org.kordamp.ikonli:ikonli-fontawesome5-pack:12.3.0"
+  implementation "org.kordamp.ikonli:ikonli-fontawesome-pack:12.3.0"
 }
 
 javafx {
-    version = "17"
-    modules = [ 'javafx.controls', 'javafx.fxml' ]
+  version = "17"
+  modules = [ 'javafx.controls', 'javafx.fxml' ]
 }
 
 // Apply a specific Java toolchain to ease working on different environments.
 java {
-    toolchain {
-        languageVersion = JavaLanguageVersion.of(17)
-    }
+  toolchain {
+    languageVersion = JavaLanguageVersion.of(17)
+  }
 }
 
 application {
-    // Define the main class for the application.
-    mainClass = 'com.s1scottd.VisualPostfixCalculator'
+  mainModule = 'VisualPostfixCalculator'
+  mainClass = 'com.s1scottd.VisualPostfixCalculator'
 }
+
+jar {
+    archiveBaseName.set('VisualPostfixCalculator')
+    manifest {
+        attributes(
+            'Main-Class': 'com.s1scottd.VisualPostfixCalculator'
+        )
+    }
+}
+
+
